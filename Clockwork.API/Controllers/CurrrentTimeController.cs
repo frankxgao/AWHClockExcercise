@@ -22,18 +22,18 @@ namespace Clockwork.API.Controllers
                 Time = serverTime
             };
 
-            using (var db = new ClockworkContext())
-            {
-                db.CurrentTimeQueries.Add(returnVal);
-                var count = db.SaveChanges();
-                Console.WriteLine("{0} records saved to database", count);
+            //using (var db = new ClockworkContext())
+            //{
+            //    db.CurrentTimeQueries.Add(returnVal);
+            //    var count = db.SaveChanges();
+            //    Console.WriteLine("{0} records saved to database", count);
 
-                Console.WriteLine();
-                foreach (var CurrentTimeQuery in db.CurrentTimeQueries)
-                {
-                    Console.WriteLine(" - {0}", CurrentTimeQuery.UTCTime);
-                }
-            }
+            //    Console.WriteLine();
+            //    foreach (var CurrentTimeQuery in db.CurrentTimeQueries)
+            //    {
+            //        Console.WriteLine(" - {0}", CurrentTimeQuery.UTCTime);
+            //    }
+            //}
 
             return Ok(returnVal);
         }

@@ -1,21 +1,104 @@
 ﻿<script>
-function UserAction() {
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            document.getElementById("output").innerHTML = this.responseText;
-        }
-    };
-    xhttp.open("GET", "http://127.0.0.1:5000/api/currenttime", true);
-    xhttp.setRequestHeader("Content-type", "application/json");
-    xhttp.send();
+    function UserAction() {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                let currentQuery = JSON.parse(this.responseText)
+             
+                document.getElementById("UTCTime").innerHTML = currentQuery.utcTime
+                document.getElementById("Time").innerHTML = currentQuery.time
+                document.getElementById("ClientIp").innerHTML = currentQuery.clientIp
+                console.log(this.responseText)
+            }
+        };
+        xhttp.open("GET", "http://127.0.0.1:5000/api/currenttime", true);
+        xhttp.setRequestHeader("Content-type", "application/json");
+        xhttp.send();
 
-}
+    }
 </script>
 
-<h2>AWH Clockwork Project @ViewData["Version"] on @ViewData["Runtime"]!</h2>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AWH Clockwork Project</title>
+</head>
+<body>
+    <div class="wrapper">
+        <h2>AWH Clockwork Project @ViewData["Version"] on @ViewData["Runtime"]!</h2>
 
+        <p class="center" id="UTCTime"></p>
+        <p class="center" id="Time"></p>
+        <p class="center" id="ClientIp"></p>
 
-<button type="submit" onclick="UserAction()">Get the time</button>
+        <button id="submitId" type="submit" onclick="UserAction()">Get the time</button>
+    </div>
 
-<p id="output"></p>
+</body>
+</html>
+
+<style>
+    html {
+        height: 100%;
+    }
+
+    body {
+        font-family: sans-serif;
+        background: linear-gradient(#173e88, #5692d8);
+    }
+
+    h2 {
+        margin: 0 0 30px;
+        padding: 0;
+        color: #fff;
+        text-align: center;
+    }
+
+    p {
+        width: 100%;
+        padding: 10px 0;
+        font-size: 16px;
+        color: #fff;
+        margin-bottom: 30px;
+        border: none;
+        border-bottom: 1px solid #fff;
+        outline: none;
+        background: transparent;
+    }
+
+    .wrapper {
+        position: absolute;
+        text-align: center;
+        top: 50%;
+        left: 50%;
+        width: 500px;
+        padding: 40px;
+        transform: translate(-50%, -50%);
+        background: rgba(0, 0, 0, 0.5);
+        box-sizing: border-box;
+        box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
+        border-radius: 10px;
+    }
+
+    #submitId {
+        background-color: rgba(8, 6, 87, 0.192);
+        position: center;
+        display: inline-block;
+        padding: 10px 20px;
+        color: #03e9f4;
+        font-size: 16px;
+        text-transform: uppercase;
+        transition: .5s;
+        letter-spacing: 4px
+    }
+
+        #submitId:hover {
+            background: #03e9f4;
+            color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 5px #03e9f4, 0 0 25px #03e9f4, 0 0 50px #03e9f4, 0 0 100px #03e9f4;
+        }
+</style>
